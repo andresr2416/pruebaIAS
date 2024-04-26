@@ -28,6 +28,10 @@ export class DeliveryComponent implements OnInit {
       cityname: ['', Validators.required],
       direccion: ['', Validators.required],
     });
+
+    this.deliveryForm.get('depname')!.valueChanges.subscribe(() => {
+      this.getCities();
+    });
   }
 
   getDepartment() {
@@ -36,12 +40,13 @@ export class DeliveryComponent implements OnInit {
     });
   }
 
-  getCities(){
-    this.citiesService.getCities(this.deliveryForm.value).subscribe((res: citiesResponse[]) => {
-      console.log(res);
-      
-      this.citiesList = res
-    })
+  getCities() {
+    // Obtener el valor actual del campo depname
+    const departmentId = this.deliveryForm.get('depname')!.value;
+    // Llamar al servicio para obtener las ciudades basadas en el departamento seleccionado
+    this.citiesService.getCities(departmentId).subscribe((res: citiesResponse[]) => {
+      this.citiesList = res;
+    });
   }
 
 

@@ -10,7 +10,8 @@ import { DisplayComponent } from './components/display/display.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { DeliveryDateComponent } from './components/delivery-date/delivery-date.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CustomInterceptor } from './custom.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true } // Agrega tu interceptor a la lista de proveedores
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
