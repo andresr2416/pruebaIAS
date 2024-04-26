@@ -1,0 +1,23 @@
+<mat-grid-list cols="1" rowHeight="6:1">
+  <mat-grid-tile>
+    <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()" action="">
+      <mat-form-field>
+        <mat-label>Selecciona departamento</mat-label>
+        <mat-select  formControlName="depname">
+          <mat-option *ngFor="let item of departmentList" [value]="item.id">{{
+            item.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Selecciona cuidad</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let item of citiesList" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    
+    </form>
+  </mat-grid-tile>
+</mat-grid-list>
